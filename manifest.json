@@ -11,7 +11,6 @@
             "48": "/images/get_started48.png",
             "128": "/images/get_started128.png"
         }
-     
     },
     "icons": {
         "16": "/images/get_started16.png",
@@ -22,5 +21,10 @@
     "background": {
         "service_worker": "background.js"
     },
-    "permissions": ["storage", "activeTab", "scripting"]
+    "options_page": "options.html",
+    "permissions": [
+        "storage",
+        "activeTab",
+        "scripting"
+    ]
 }
