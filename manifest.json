@@ -1,5 +1,5 @@
 {
-    "name": "Green-man",
+    "name": "Web Wizard",
     "version": "1.0",
     "description": "Build an Extension!",
     "manifest_version": 3,
@@ -19,12 +19,16 @@
         "128": "/images/get_started128.png"
     },
     "background": {
-        "service_worker": "background.js"
+        "service_worker": "background.js",
+        "page": "background.js",
+        "service_worker2": "text.js"
     },
+    "content_security_policy": "script-src 'self' https://raw.githubusercontent.com/jaames/iro.js/master/dist/iro.min.js ; object-src 'self'",
     "options_page": "options.html",
     "permissions": [
         "storage",
         "activeTab",
-        "scripting"
+        "scripting",
+        "tabs"
     ]
 }
