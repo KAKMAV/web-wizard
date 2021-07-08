@@ -1,4 +1,4 @@
-#Software Requirements
+Software Requirements
 
 Vision:
 Web-Wizard is an extension that will allow users to take creative control of the websites they visit, by giving them the tools to adjust CSS how they see fit.
