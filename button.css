@@ -1,4 +1,6 @@
 button {
+    display: grid;
+    margin: 5px;
     cursor: pointer;
     height: 30px;
     width: 30px;
