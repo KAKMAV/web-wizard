@@ -1,34 +1,30 @@
 {
+    "manifest_version": 2,
     "name": "Web Wizard",
     "version": "1.0",
-    "description": "Build an Extension!",
-    "manifest_version": 3,
-    "action": {
-        "default_popup": "popup.html",
-        "default_icon": {
-            "16": "/images/get_started16.png",
-            "32": "/images/get_started32.png",
-            "48": "/images/get_started48.png",
-            "128": "/images/get_started128.png"
-        }
-    },
+    "description": "Adds a red border to all webpages matching mozilla.org.",
     "icons": {
         "16": "/images/get_started16.png",
         "32": "/images/get_started32.png",
         "48": "/images/get_started48.png",
         "128": "/images/get_started128.png"
     },
-    "background": {
-        "service_worker": "background.js",
-        "page": "background.js",
-        "service_worker2": "text.js"
-    },
-    "content_security_policy": "script-src 'self' https://raw.githubusercontent.com/jaames/iro.js/master/dist/iro.min.js ; object-src 'self'",
-    "options_page": "options.html",
     "permissions": [
-        "storage",
-        "activeTab",
-        "scripting",
-        "tabs"
-    ]
+        "activeTab"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.mozilla.org/*"
+            ],
+            "js": [
+                "popup.js"
+            ]
+        }
+    ],
+    "browser_action": {
+        "default_icon": "/images/get_started16.png",
+        "default_title": "Web WIzard",
+        "default_popup": "popup.html"
+    }
 }
