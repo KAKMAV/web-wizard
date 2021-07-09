@@ -1,0 +1,39 @@
+
+
+h2 {
+    margin-bottom: 5px;
+}
+
+div {
+    padding: 5px;
+}
+
+.backgroundColor {
+    margin-top: 10px;
+}
+
+button {
+    display: grid;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    height: 25px;
+    width: 90px;
+    border: 2px solid;
+    border-radius: 15%;
+}
+
+#storedDesign1 {
+border: 5px, solid, black;
+border-radius: 15%;
+height: 20px;
+width: 20px;
+}
+
+#colorPicker {
+    border: 2px, solid, black;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    flex-wrap: wrap;
+}
