@@ -1,5 +1,7 @@
 {
     "manifest_version": 2,
+
+ 
     "name": "Web Wizard",
     "version": "1.0",
     "description": "Adds a red border to all webpages matching mozilla.org.",
@@ -9,6 +11,7 @@
         "48": "/images/get_started48.png",
         "128": "/images/get_started128.png"
     },
+
     "permissions": [
         "activeTab"
     ],
