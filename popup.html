@@ -1,81 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
 
-<head>
-    <link rel="stylesheet" href="popup.css">
-
-
-</head>
-
-
-
-<body>
-
+  <body>
     <div className="popup-ui">
-        <div className="top-section">
-            <div className="top-left-section">
-                <!-- <div id="colorPicker">
+      <div className="top-section">
+        <div className="top-left-section">
+          <!-- <div id="colorPicker">
                     <div id="colorPickerBox"></div>
                     <h2>Color Gradient Selector</h2>
                 </div> -->
-                <div class="color-reset">
-                    <input type="text" id="colorInput" placeholder="choose color now, or don't, your choice">
-                    <button>Click me, I'm lonley</button>
-                </div>
-                <div style="text-align: center">
-                    <input type="text" id="hex">
-                    <input type="color" id="color">
-                </div>
-            </div>
-            <div className="top-right-section">
-                <div className="backgroundColor">
-                    <label for="backgroundColor">Background Color:</label>
-                    <input id="backgroundColor" name="backgroundColor"><br>
-                </div>
-
-                <div>
-                    <label for="elementColor">Element Color:</label>
-                    <input id="elementColor" name="elementColor"><br>
-                </div>
-            </div>
+          <div class="color-reset">
+            <input
+              type="text"
+              id="colorInput"
+              placeholder="choose color now, or don't, your choice"
+            />
+            <button>Click me, I'm lonley</button>
+          </div>
+          <div style="text-align: center">
+            <input type="text" id="hex" />
+            <input type="color" id="color" />
+          </div>
         </div>
-        <div className="bottom-section">
-            <div className="bottom-left-section">
-                <div>
-                    <label for="fontFamily">Font Family:</label>
-                    <input type="text" id="fontFamily" name="fontFamily"><br>
-                </div>
+        <div className="top-right-section">
+          <div className="backgroundColor">
+            <label for="backgroundColor">Background Color:</label>
+            <input id="backgroundColor" name="backgroundColor" /><br />
+          </div>
 
-                <div>
-                    <label for="fontSize">Font Size:</label>
-                    <input type="number" id="fontSize" name="fontSize"><br>
-                </div>
-
-                <div>
-                    <label for="fontColor">Font Color:</label>
-                    <input id="fontColor" name="fontColor"><br>
-                </div>
-            </div>
-            <div className="bottom-right-section">
-                <div>
-                    <button>Save Design</button>
-                    <button>Undo All</button>
-                </div>
-
-                <div>
-                    <h2>Stored Designs</h2>
-                    <div id="storedDesign1">Design1</div>
-                    <div id="storedDesign2">Design2</div>
-                    <div id="storedDesign3">Design3</div>
-                </div>
-            </div>
+          <div>
+            <label for="elementColor">Element Color:</label>
+            <input id="elementColor" name="elementColor" /><br />
+          </div>
         </div>
+      </div>
+      <div className="bottom-section">
+        <div className="bottom-left-section">
+          <div>
+            <label for="fontFamily">Font Family:</label>
+            <input type="text" id="fontFamily" name="fontFamily" /><br />
+          </div>
+
+          <div>
+            <label for="fontSize">Font Size:</label>
+            <input type="number" id="fontSize" name="fontSize" /><br />
+            <button id="font-size-reset">Change Font Size</button>
+          </div>
+
+          <div>
+            <label for="fontColor">Font Color:</label>
+            <input id="fontColor" name="fontColor" /><br />
+          </div>
+        </div>
+        <div className="bottom-right-section">
+          <div>
+            <button>Save Design</button>
+            <button>Undo All</button>
+          </div>
+
+          <div>
+            <h2>Stored Designs</h2>
+            <div id="storedDesign1">Design1</div>
+            <div id="storedDesign2">Design2</div>
+            <div id="storedDesign3">Design3</div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="popup.js"></script>
-
-</body>
-
-
-
+  </body>
 </html>
