@@ -1,6 +1,10 @@
 const colorPick = document.getElementById('colorInput');
-const reset = document.querySelector('.color-reset button');
-const cookieVal = { color : ''};
+const resetColor = document.querySelector('.color-reset button');
+const cookieVal = { color : '', fontSize : ''};
+
+const fontSizeChange = document.getElementById('fontSize');
+const resetFontSize = document.querySelector('.font-size-reset button');
+
 
 console.log('hello', colorPick);
 
@@ -24,7 +28,23 @@ colorPick.onchange = function (e) {
     });
 }
 
-reset.onclick = function () {
+fontSize.onchange = function (e) {
+    getActiveTab().then((tabs) => {
+        const currentFontSize = e.target.value;
+        browser.tabs.sendMessage(tabs[0].id, {
+            font: currentFontSize
+        });
+
+    cookieVal.fontSize = currenFontSize;
+    browser.cookie.set({
+        url: tabs[0].url,
+        name: 'popup',
+        value: JSON.stringify(cookieVal)
+        })
+    });
+}
+
+resetColor.onclick = function () {
     console.log('hello');
     getActiveTab().then((tabs) => {
         browser.tabs.sendMessage(tabs[0].id, {
@@ -33,6 +53,24 @@ reset.onclick = function () {
 
         cookieVal = {
             color: ''
+        };
+
+        browser.cookies.remove({
+            url: tabs[0].url,
+            name: 'popup'
+        })
+    });
+}
+
+
+resetFontSize.onclick = function () {
+    getActiveTab().then((tabs) => {
+        browser.tabs.sendMessage(tabs[0].id, {
+            reset: true
+        });
+
+        cookieVal = {
+            fontSize: '',
         };
 
         browser.cookies.remove({
