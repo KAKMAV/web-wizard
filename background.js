@@ -1,13 +1,21 @@
-let color = '#3aa757';
-
-chrome.runtime.onInstalled.addListener(() => {
-    chrome.storage.sync.set({ color });
-    console.log('default background color set to green', `color:${color}`)
-});
-
-function buildCanvas(width, height) {
-    const canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
-    return canvas;
+function getActiveTab() {
+    return browser.tabs.query({ active: true, currentWindow: true });
 }
+
+function cookieUpdate() {
+    getActiveTab().then((tabs) => {
+        const gettingCookies = browser.cookies.get({
+            url: tabs[0].url,
+            name: "colorPicker"
+        });
+        gettingCookies.then((cookie) => {
+            if (cookie) {
+                const cookieVal = JSON.parse(cookie.value);
+                browser.tabs.sendMessage(tabs[0].id, { color: cookieVal.color });
+            }
+        });
+    });
+}
+
+browser.tabs.onUpdated.addListener(cookieUpdate);
+browser.tabs.onActivated.addListener(cookieUpdate);
