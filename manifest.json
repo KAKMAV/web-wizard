@@ -14,19 +14,23 @@
         "cookies",
         "<all_urls>"
     ],
+    "browser_action": {
+        "default_icon": "/images/get_started16.png",
+        "default_title": "Web Wizard",
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts": ["background.js"]
+    },
     "content_scripts": [
         {
             "matches": [
                 "<all_urls>"
             ],
             "js": [
-                "./content_scripts/updateCss.js"
+                "content_scripts/updateCss.js"
             ]
         }
-    ],
-    "browser_action": {
-        "default_icon": "/images/get_started16.png",
-        "default_title": "Web WIzard",
-        "default_popup": "popup.html"
-    }
+    ]
+  
 }
