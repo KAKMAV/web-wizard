@@ -6,7 +6,7 @@ function cookieUpdate() {
     getActiveTab().then((tabs) => {
         const gettingCookies = browser.cookies.get({
             url: tabs[0].url,
-            name: "colorPicker"
+            name: "popup"
         });
         gettingCookies.then((cookie) => {
             if (cookie) {

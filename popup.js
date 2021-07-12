@@ -1,5 +1,12 @@
-const colorPick = document.querySelector('input');
+const colorPick = document.getElementById('colorInput');
 const reset = document.querySelector('.color-reset button');
+const cookieVal = { color : ''};
+
+console.log('hello', colorPick);
+
+function getActiveTab() {
+    return browser.tabs.query({active: true, currentWindow: true});
+}
 
 colorPick.onchange = function (e) {
     getActiveTab().then((tabs) => {
@@ -18,6 +25,7 @@ colorPick.onchange = function (e) {
 }
 
 reset.onclick = function () {
+    console.log('hello');
     getActiveTab().then((tabs) => {
         browser.tabs.sendMessage(tabs[0].id, {
             reset: true
