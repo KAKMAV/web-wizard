@@ -8,8 +8,17 @@ function updateCSS(request, sender, sendResponse) {
     if (request.color) {
         html.style.backgroundColor = request.color;
         body.style.backgroundColor = request.color;
+
+    } else if (request.fontSize) {
+        html.style.fontSize = request.fontSize;
+        body.style.fontSize = request.fontSize;
+        
     } else if (request.reset) {
         html.style.backgroundColor = '';
         body.style.backgroundColor = '';
+        html.style.fontSize = '';
+        body.style.fontSize = '';
     }
+    
+
 }
