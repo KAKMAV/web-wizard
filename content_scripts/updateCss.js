@@ -3,7 +3,7 @@ browser.runtime.onMessage.addListener(updateCSS);
 function updateCSS(request, sender, sendResponse) {
     const html = document.querySelector('html');
     const body = document.querySelector('body');
-    window.confirm('hello');
+
 
     if (request.color) {
         html.style.backgroundColor = request.color;
