@@ -1,41 +1,42 @@
-let changeColor = document.getElementById("changeColor");
-// let changeFontSize = document.getElementById("changeFontSize");
+const colorPick = document.querySelector('input');
+const reset = document.querySelector('.color-reset button');
 
-// chrome.storage.sync.get("fontSize", ({ fontSize }) => {
-//     changeColor.style.fontSize = fontSize;
-// });
+colorPick.onchange = function (e) {
+    getActiveTab().then((tabs) => {
+        const currentColor = e.target.value;
+        browser.tabs.sendMessage(tabs[0].id, {
+            color: currentColor
+        });
 
-chrome.storage.sync.get("color", ({ color }) => {
-    changeColor.style.backgroundColor = color;
-});
-
-changeColor.addEventListener("click", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        function: setPageBackgroundColor,
-
-    });
-});
-
-// changeFontSize.addEventListener("click", async() => {
-//     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-//     chrome.scripting.executeScript({
-//         target: { tabId: tab.id },
-//         function: setPageFontSize,
-//     });
-// });
-
-function setPageBackgroundColor() {
-    chrome.storage.sync.get("color", ({ color }) => {
-        document.body.style.backgroundColor = color;
+        cookieVal.color = currentColor;
+        browser.cookies.set({
+            url: tabs[0].url,
+            name: 'popup',
+            value: JSON.stringify(cookieVal)
+        })
     });
 }
 
+reset.onclick = function () {
+    getActiveTab().then((tabs) => {
+        browser.tabs.sendMessage(tabs[0].id, {
+            reset: true
+        });
 
+        cookieVal = {
+            color: ''
+        };
 
-// function setFontSize() {
-//     chrome.storage.sync.get("fontSize", ({ fontSize }) => {
-//         document.body.style.fontSize = fontSize;
-//     });
-// }
+        browser.cookies.remove({
+            url: tabs[0].url,
+            name: 'popup'
+        })
+    });
+}
+
+browser.cookies.onChanged.addListener((changeInfo) => {
+    console.log(`cookie changed:\n
+    * cookie: ${JSON.stringify(changeInfo.cookie)}\n
+    * cause: ${changeInfo.cause}\n
+    * removed: ${changeInfo.removed}`);
+});

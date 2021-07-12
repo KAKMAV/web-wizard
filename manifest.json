@@ -20,7 +20,7 @@
                 "<all_urls>"
             ],
             "js": [
-                "./popup.js"
+                "./content_scripts/updateCss.js"
             ]
         }
     ],
