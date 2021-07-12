@@ -1,48 +1,86 @@
-let changeColor = document.getElementById("changeColor");
-let changeFontSize = document.getElementById("changeFontSize");
-// import iro from '@jaames/iro';
+const colorPick = document.getElementById('colorInput');
+const resetColor = document.querySelector('.color-reset button');
+const cookieVal = { color: '', fontSize: '', fontFamily: '' };
 
+const fontSizeChange = document.getElementById('fontSize');
+const fontFamilyChange = document.getElementById('fontFamily');
+const resetFontSize = document.getElementById('font-size-reset');
 
-const colorPicker = new iro.ColorPicker("#picker")
-
-chrome.tabs.excecuteScript(tab.id, {
-    code:
-        "document.body.appendChild(document.createElement('script')).src = 'https://cdn.jsdelivr.net/npm/@jaames/iro@5';"
-})
-
-chrome.storage.sync.get("fontSize", ({ fontSize }) => {
-    changeColor.style.fontSize = fontSize;
-});
-
-chrome.storage.sync.get("color", ({ color }) => {
-    changeColor.style.backgroundColor = color;
-});
-
-changeColor.addEventListener("click", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        function: setPageBackgroundColor,
-
-    });
-});
-
-changeFontSize.addEventListener("click", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        function: setPageFontSize,
-    });
-});
-
-function setPageBackgroundColor() {
-    chrome.storage.sync.get("color", ({ color }) => {
-        document.body.style.backgroundColor = color;
-    });
+function getActiveTab() {
+  return browser.tabs.query({ active: true, currentWindow: true });
 }
 
-function setFontSize() {
-    chrome.storage.sync.get("fontSize", ({ fontSize }) => {
-        document.body.style.fontSize = fontSize;
+colorPick.onchange = function (e) {
+  getActiveTab().then((tabs) => {
+    const currentColor = e.target.value;
+    browser.tabs.sendMessage(tabs[0].id, {
+      color: currentColor,
     });
-}
+
+    cookieVal.color = currentColor;
+    browser.cookies.set({
+      url: tabs[0].url,
+      name: 'popup',
+      value: JSON.stringify(cookieVal),
+    });
+  });
+};
+
+fontSize.onchange = function (e) {
+  getActiveTab().then((tabs) => {
+    const currentFontSize = e.target.value;
+    browser.tabs.sendMessage(tabs[0].id, {
+      fontSize: currentFontSize + 'px',
+    });
+
+    cookieVal.fontSize = currenFontSize;
+    browser.cookie.set({
+      url: tabs[0].url,
+      name: 'popup',
+      value: JSON.stringify(cookieVal),
+    });
+  });
+};
+
+fontFamily.onchange = function (e) {
+  getActiveTab().then((tabs) => {
+    const currentFontFamily = e.target.value;
+    browser.tabs.sendMessage(tabs[0].id, {
+      fontFamily: currentFontFamily,
+    });
+
+    cookieVal.fontFamily = currentFontFamily;
+    browser.cookie.set({
+      url: tabs[0].url,
+      name: 'popup',
+      value: JSON.stringify(cookieVal),
+    });
+  });
+};
+
+resetColor.onclick = function () {
+  console.log('hello');
+  getActiveTab().then((tabs) => {
+    browser.tabs.sendMessage(tabs[0].id, {
+      reset: true,
+    });
+
+    cookieVal = {
+      color: '',
+      fontSize: '',
+      fontFamily: '',
+    };
+
+    browser.cookies.remove({
+      url: tabs[0].url,
+      name: 'popup',
+    });
+  });
+};
+
+browser.cookies.onChanged.addListener((changeInfo) => {
+  console.log(`cookie changed:\n
+    * cookie: ${JSON.stringify(changeInfo.cookie)}\n
+    * cause: ${changeInfo.cause}\n
+    * removed: ${changeInfo.removed}`);
+});
