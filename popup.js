@@ -1,3 +1,4 @@
+
 const colorPick = document.getElementById('colorInput');
 const resetColor = document.getElementById('color-reset');
 const cookieVal = { color: '', fontSize: '', fontFamily: '' };
@@ -63,6 +64,7 @@ resetColor.onclick = function () {
   getActiveTab().then((tabs) => {
     browser.tabs.sendMessage(tabs[0].id, {
       reset: true,
+
     });
 
     cookieVal = {
@@ -80,6 +82,7 @@ resetColor.onclick = function () {
 
 browser.cookies.onChanged.addListener((changeInfo) => {
   console.log(`cookie changed:\n
+
     * cookie: ${JSON.stringify(changeInfo.cookie)}\n
     * cause: ${changeInfo.cause}\n
     * removed: ${changeInfo.removed}`);
