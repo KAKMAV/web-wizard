@@ -76,26 +76,26 @@ textContentChange.onchange = function (e) {
   });
 };
 
-
 resetColor.onclick = function () {
-  console.log('hello');
-  getActiveTab().then((tabs) => {
-    browser.tabs.sendMessage(tabs[0].id, {
-      reset: true,
+  getActiveTab()
+    .then((tabs) => {
+      browser.tabs.sendMessage(tabs[0].id, {
+        reset: true,
+      });
+      return tabs;
+    })
+    .then((tabs) => {
+      browser.cookies.remove({
+        name: 'popup',
+        url: tabs[0].url,
+      });
     });
-
-    cookieVal = {
-      color: '',
-      fontSize: '',
-      fontFamily: '',
-      textContent: '',
-    };
-
-    browser.cookies.remove({
-      url: tabs[0].url,
-      name: 'popup',
-    });
-  });
+  cookieVal = {
+    color: '',
+    fontSize: '',
+    fontFamily: '',
+    textContent: '',
+  };
 };
 
 browser.cookies.onChanged.addListener((changeInfo) => {
