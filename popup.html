@@ -6,26 +6,23 @@
 </head>
 
 <body>
-    <div className="popup-ui">
-        <div className="top-section">
-            <div className="top-left-section">
+    <div class="popup-ui">
+        <div class="top-section">
+            <div class="top-left-section">
                 <!-- <div id="colorPicker">
                     <div id="colorPickerBox"></div>
                     <h2>Color Gradient Selector</h2>
                 </div> -->
-                <div class="color-reset">
-                    <input type="text" id="colorInput" placeholder="choose color now, or don't, your choice" />
-                    <button>Click me, I'm lonley</button>
-                </div>
-                <div style="text-align: center">
+
+                <!-- <div style="text-align: center">
                     <input type="text" id="hex" />
                     <input type="color" id="color" />
-                </div>
+                </div> -->
             </div>
-            <div className="top-right-section">
-                <div className="backgroundColor">
+            <div class="top-right-section">
+                <div class="backgroundColor">
                     <label for="backgroundColor">Background Color:</label>
-                    <input id="backgroundColor" name="backgroundColor" /><br />
+                    <input type="text" id="colorInput" placeholder="choose color now" /><br />
                 </div>
 
                 <div>
@@ -34,8 +31,8 @@
                 </div>
             </div>
         </div>
-        <div className="bottom-section">
-            <div className="bottom-left-section">
+        <div class="bottom-section">
+            <div class="bottom-left-section">
                 <div>
                     <label for="fontFamily">Font Family:</label>
                     <input type="text" id="fontFamily" name="fontFamily" /><br />
@@ -44,7 +41,7 @@
                 <div>
                     <label for="fontSize">Font Size:</label>
                     <input type="number" id="fontSize" name="fontSize" /><br />
-                    <button id="font-size-reset">Change Font Size</button>
+                    <!-- <button id="font-size-reset">Change Font Size</button> -->
                 </div>
 
                 <div>
@@ -52,17 +49,26 @@
                     <input id="fontColor" name="fontColor" /><br />
                 </div>
             </div>
-            <div className="bottom-right-section">
-                <div>
+            <div class="bottom-right-section">
+                <div class="design-save">
                     <button>Save Design</button>
-                    <button>Undo All</button>
+                    <button id="color-reset">Undo All</button>
                 </div>
 
-                <div>
-                    <h2>Stored Designs</h2>
-                    <div id="storedDesign1">Design1</div>
-                    <div id="storedDesign2">Design2</div>
-                    <div id="storedDesign3">Design3</div>
+                <h2>Stored Designs</h2>
+                <div class="stored-designs">
+                    <div class="storedDesign1">
+
+                        <button>Design1</button>
+                    </div>
+                    <div class="storedDesign2">
+
+                        <button>Design2</button>
+                    </div>
+                    <div class="storedDesign3">
+
+                        <button>Design3</button>
+                    </div>
                 </div>
             </div>
         </div>

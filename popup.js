@@ -1,5 +1,5 @@
 const colorPick = document.getElementById('colorInput');
-const resetColor = document.querySelector('.color-reset button');
+const resetColor = document.getElementById('color-reset');
 const cookieVal = { color: '', fontSize: '', fontFamily: '' };
 
 const fontSizeChange = document.getElementById('fontSize');
