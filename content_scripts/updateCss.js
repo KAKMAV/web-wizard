@@ -12,6 +12,11 @@ function updateCSS(request, sender, sendResponse) {
     } else if (request.fontSize) {
         html.style.fontSize = request.fontSize;
         body.style.fontSize = request.fontSize;
+
+    } else if (request.image) {
+        html.style.backgroundImage = 'url(' + request.image + ')';
+        body.style.backgroundImage = 'url(' + request.image + ')';
+    }
         
     } else if (request.reset) {
         html.style.backgroundColor = '';
@@ -19,6 +24,4 @@ function updateCSS(request, sender, sendResponse) {
         html.style.fontSize = '';
         body.style.fontSize = '';
     }
-    
-
 }
