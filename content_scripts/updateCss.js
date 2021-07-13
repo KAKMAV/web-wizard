@@ -13,6 +13,9 @@ function updateCSS(request, sender, sendResponse) {
   } else if (request.fontFamily) {
     html.style.fontFamily = request.fontFamily;
     body.style.fontFamily = request.fontFamily;
+  } else if (request.textContent) {
+    html.textContent = request.textContent;
+    body.textContent = request.textContent;
   } else if (request.reset) {
     html.style.backgroundColor = '';
     body.style.backgroundColor = '';
