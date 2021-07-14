@@ -86,16 +86,6 @@ textContentChange.onchange = function (e) {
   });
 };
 
-//textContent Substitution Function
-
-
-
-
-
-
-
-
-
 
 resetColor.onclick = function () {
   getActiveTab()

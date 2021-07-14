@@ -1,5 +1,4 @@
 browser.runtime.onMessage.addListener(updateCSS);
-
 function replaceText(wordMap, node) {
   if (node.nodeType === Node.TEXT_NODE) {
     if (node.parentNode && node.parentNode.nodeName === 'TEXTAREA') {
@@ -16,11 +15,9 @@ function replaceText(wordMap, node) {
     }
   }
 }
-
 function updateCSS(request, sender, sendResponse) {
   const html = document.querySelector('html');
   const body = document.querySelector('body');
-
   if (request.backgroundColor) {
     html.style.backgroundColor = request.backgroundColor;
     body.style.backgroundColor = request.backgroundColor;
@@ -44,5 +41,3 @@ function updateCSS(request, sender, sendResponse) {
     body.style.fontFamily = '';
   }
 }
-
-

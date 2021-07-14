@@ -1,6 +1,7 @@
 
 body {
     background-image: url("images/Web_Wizard.png");
+
     background-size: 75%;
     background-repeat: no-repeat;
     background-position: center;
@@ -10,9 +11,6 @@ body {
     font-weight: bolder;
     
 }
-
-
-
 
 
 .popup-ui {
