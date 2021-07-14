@@ -110,20 +110,7 @@ button {
     justify-content: space-evenly;
 }
 
-.storedDesign1 > button {
-    height: 55px;
-    width: 65px;
-}
 
-.storedDesign2 > button {
-    height: 55px;
-    width: 65px;
-}
-
-.storedDesign3 > button {
-    height: 55px;
-    width: 65px;
-}
 
 
 input {

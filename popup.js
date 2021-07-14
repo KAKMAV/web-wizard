@@ -1,9 +1,12 @@
 const colorPick = document.getElementById('colorInput');
 const resetColor = document.getElementById('color-reset');
-const cookieVal = { color: '', fontSize: '', fontFamily: '' };
+const cookieVal = {};
 
+const fontColorChange = document.getElementById('fontColor');
 const fontSizeChange = document.getElementById('fontSize');
 const fontFamilyChange = document.getElementById('fontFamily');
+
+const textContentChange = document.getElementById('textContent');
 const resetFontSize = document.getElementById('font-size-reset');
 
 function getActiveTab() {
@@ -12,12 +15,28 @@ function getActiveTab() {
 
 colorPick.onchange = function (e) {
   getActiveTab().then((tabs) => {
-    const currentColor = e.target.value;
+    const backgroundColor = e.target.value;
     browser.tabs.sendMessage(tabs[0].id, {
-      color: currentColor,
+      backgroundColor,
     });
 
-    cookieVal.color = currentColor;
+    cookieVal.backgroundColor = backgroundColor;
+    browser.cookies.set({
+      url: tabs[0].url,
+      name: 'popup',
+      value: JSON.stringify(cookieVal),
+    });
+  });
+};
+
+fontColor.onchange = function (e) {
+  getActiveTab().then((tabs) => {
+    const color = e.target.value;
+    browser.tabs.sendMessage(tabs[0].id, {
+      color,
+    });
+
+    cookieVal.color = color;
     browser.cookies.set({
       url: tabs[0].url,
       name: 'popup',
@@ -28,13 +47,13 @@ colorPick.onchange = function (e) {
 
 fontSize.onchange = function (e) {
   getActiveTab().then((tabs) => {
-    const currentFontSize = e.target.value;
+    const fontSize = e.target.value + 'px';
     browser.tabs.sendMessage(tabs[0].id, {
-      fontSize: currentFontSize + 'px',
+      fontSize,
     });
 
-    cookieVal.fontSize = currenFontSize;
-    browser.cookie.set({
+    cookieVal.fontSize = fontSize;
+    browser.cookies.set({
       url: tabs[0].url,
       name: 'popup',
       value: JSON.stringify(cookieVal),
@@ -42,15 +61,30 @@ fontSize.onchange = function (e) {
   });
 };
 
-fontFamily.onchange = function (e) {
+fontFamilyChange.onchange = function (e) {
   getActiveTab().then((tabs) => {
-    const currentFontFamily = e.target.value;
+    const fontFamily = e.target.value;
     browser.tabs.sendMessage(tabs[0].id, {
-      fontFamily: currentFontFamily,
+      fontFamily,
+    });
+    cookieVal.fontFamily = fontFamily;
+    browser.cookies.set({
+      url: tabs[0].url,
+      name: 'popup',
+      value: JSON.stringify(cookieVal),
+    });
+  });
+};
+
+textContentChange.onchange = function (e) {
+  getActiveTab().then((tabs) => {
+    const currentTextContent = e.target.value;
+    browser.tabs.sendMessage(tabs[0].id, {
+      textContent: currentTextContent,
     });
 
-    cookieVal.fontFamily = currentFontFamily;
-    browser.cookie.set({
+    cookieVal.textContent = currentTextContent;
+    browser.cookies.set({
       url: tabs[0].url,
       name: 'popup',
       value: JSON.stringify(cookieVal),
@@ -59,23 +93,25 @@ fontFamily.onchange = function (e) {
 };
 
 resetColor.onclick = function () {
-  console.log('hello');
-  getActiveTab().then((tabs) => {
-    browser.tabs.sendMessage(tabs[0].id, {
-      reset: true,
+  getActiveTab()
+    .then((tabs) => {
+      browser.tabs.sendMessage(tabs[0].id, {
+        reset: true,
+      });
+      return tabs;
+    })
+    .then((tabs) => {
+      browser.cookies.remove({
+        name: 'popup',
+        url: tabs[0].url,
+      });
     });
-
-    cookieVal = {
-      color: '',
-      fontSize: '',
-      fontFamily: '',
-    };
-
-    browser.cookies.remove({
-      url: tabs[0].url,
-      name: 'popup',
-    });
-  });
+  cookieVal = {
+    color: '',
+    fontSize: '',
+    fontFamily: '',
+    textContent: '',
+  };
 };
 
 browser.cookies.onChanged.addListener((changeInfo) => {
