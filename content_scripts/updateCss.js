@@ -17,11 +17,6 @@ function replaceText(wordMap, node) {
     }
 }
 
-// let regexs = new Map();
-// for (let word of wordMap.keys()) {
-//     regexs.set(word, new RegExp(word, 'gi'));
-// }
-
 function updateCSS(request, sender, sendResponse) {
     const html = document.querySelector('html');
     const body = document.querySelector('body');
