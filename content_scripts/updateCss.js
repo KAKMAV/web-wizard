@@ -15,6 +15,16 @@ function replaceText(wordMap, node) {
             replaceText(wordMap, node.childNodes[i]);
         }
     }
+    let content = node.textContent;
+    for (let word in wordMap) {
+        content = content.replace(new RegExp(word, 'gi'), wordMap[word]);
+    }
+    node.textContent = content;
+} else {
+    for (let i = 0; i < node.childNodes.length; i++) {
+        replaceText(wordMap, node.childNodes[i]);
+    }
+}
 }
 
 function updateCSS(request, sender, sendResponse) {
@@ -34,8 +44,7 @@ function updateCSS(request, sender, sendResponse) {
         html.style.color = request.fontColor;
         body.style.color = request.fontColor;
     } else if (request.textContent) {
-        const wordMap = { about: request.textContent };
-        replaceText(wordMap, document.body);
+        replaceText(JSON.parse(request.textContent), document.body);
     } else if (request.reset) {
         html.style.backgroundColor = '';
         body.style.backgroundColor = '';
@@ -45,3 +54,5 @@ function updateCSS(request, sender, sendResponse) {
         body.style.fontFamily = '';
     }
 }
+
+
