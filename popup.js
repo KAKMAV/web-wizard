@@ -1,6 +1,6 @@
 const colorPick = document.getElementById('colorInput');
 const resetColor = document.getElementById('color-reset');
-const cookieVal = { backgroundColor: '', fontSize: '', fontFamily: '', fontColor: '' };
+const cookieVal = {};
 
 const fontColorChange = document.getElementById('fontColor')
 const fontSizeChange = document.getElementById('fontSize');
@@ -85,15 +85,6 @@ textContentChange.onchange = function (e) {
     });
   });
 };
-
-//textContent Substitution Function
-
-
-
-
-
-
-
 
 
 

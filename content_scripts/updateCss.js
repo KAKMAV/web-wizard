@@ -7,7 +7,7 @@ function replaceText(wordMap, node) {
         }
         let content = node.textContent;
         for (let word in wordMap) {
-            content = content.replace(word, wordMap[word]);
+            content = content.replace(new RegExp(word, 'gi'), wordMap[word]);
         }
         node.textContent = content;
     } else {
@@ -16,6 +16,11 @@ function replaceText(wordMap, node) {
         }
     }
 }
+
+// let regexs = new Map();
+// for (let word of wordMap.keys()) {
+//     regexs.set(word, new RegExp(word, 'gi'));
+// }
 
 function updateCSS(request, sender, sendResponse) {
     const html = document.querySelector('html');
@@ -34,7 +39,9 @@ function updateCSS(request, sender, sendResponse) {
         html.style.color = request.fontColor;
         body.style.color = request.fontColor;
     } else if (request.textContent) {
-        const wordMap = { about: request.textContent };
+        console.log(request.textContent);
+        const wordMap = JSON.parse(request.textContent);
+        console.log('wordMap', wordMap);
         replaceText(wordMap, document.body);
     } else if (request.reset) {
         html.style.backgroundColor = '';
