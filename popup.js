@@ -2,7 +2,7 @@ const colorPick = document.getElementById('colorInput');
 const resetColor = document.getElementById('color-reset');
 const cookieVal = {};
 
-const fontColorChange = document.getElementById('fontColor')
+const fontColorChange = document.getElementById('fontColor');
 const fontSizeChange = document.getElementById('fontSize');
 const fontFamilyChange = document.getElementById('fontFamily');
 
