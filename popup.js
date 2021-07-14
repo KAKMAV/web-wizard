@@ -5,7 +5,9 @@ const cookieVal = { backgroundColor: '', fontSize: '', fontFamily: '', fontColor
 const fontColorChange = document.getElementById('fontColor')
 const fontSizeChange = document.getElementById('fontSize');
 const fontFamilyChange = document.getElementById('fontFamily');
-// const resetFontSize = document.getElementById('font-size-reset');
+
+const textContentChange = document.getElementById('textContent');
+const resetFontSize = document.getElementById('font-size-reset');
 
 function getActiveTab() {
   return browser.tabs.query({ active: true, currentWindow: true });
@@ -52,7 +54,7 @@ fontSize.onchange = function (e) {
   });
 };
 
-fontFamily.onchange = function (e) {
+fontFamilyChange.onchange = function (e) {
   getActiveTab().then((tabs) => {
     const currentFontFamily = e.target.value;
     browser.tabs.sendMessage(tabs[0].id, {
@@ -68,25 +70,42 @@ fontFamily.onchange = function (e) {
   });
 };
 
-resetColor.onclick = function () {
-  console.log('hello');
+textContentChange.onchange = function (e) {
   getActiveTab().then((tabs) => {
+    const currentTextContent = e.target.value;
     browser.tabs.sendMessage(tabs[0].id, {
-      reset: true,
+      textContent: currentTextContent,
     });
 
-    cookieVal = {
-      backgroundColor: '',
-      fontSize: '',
-      fontFamily: '',
-      fontColor: ''
-    };
-
-    browser.cookies.remove({
+    cookieVal.textContent = currentTextContent;
+    browser.cookie.set({
       url: tabs[0].url,
       name: 'popup',
+      value: JSON.stringify(cookieVal),
     });
   });
+};
+
+resetColor.onclick = function () {
+  getActiveTab()
+    .then((tabs) => {
+      browser.tabs.sendMessage(tabs[0].id, {
+        reset: true,
+      });
+      return tabs;
+    })
+    .then((tabs) => {
+      browser.cookies.remove({
+        name: 'popup',
+        url: tabs[0].url,
+      });
+    });
+  cookieVal = {
+    color: '',
+    fontSize: '',
+    fontFamily: '',
+    textContent: '',
+  };
 };
 
 browser.cookies.onChanged.addListener((changeInfo) => {
