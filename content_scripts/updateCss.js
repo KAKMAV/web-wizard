@@ -1,5 +1,4 @@
 browser.runtime.onMessage.addListener(updateCSS);
-
 function replaceText(wordMap, node) {
     if (node.nodeType === Node.TEXT_NODE) {
         if (node.parentNode && node.parentNode.nodeName === 'TEXTAREA') {
@@ -7,7 +6,7 @@ function replaceText(wordMap, node) {
         }
         let content = node.textContent;
         for (let word in wordMap) {
-            content = content.replace(word, wordMap[word]);
+            content = content.replace(new RegExp(word, 'gi'), wordMap[word]);
         }
         node.textContent = content;
     } else {
@@ -15,22 +14,10 @@ function replaceText(wordMap, node) {
             replaceText(wordMap, node.childNodes[i]);
         }
     }
-    let content = node.textContent;
-    for (let word in wordMap) {
-        content = content.replace(new RegExp(word, 'gi'), wordMap[word]);
-    }
-    node.textContent = content;
-} else {
-    for (let i = 0; i < node.childNodes.length; i++) {
-        replaceText(wordMap, node.childNodes[i]);
-    }
 }
-}
-
 function updateCSS(request, sender, sendResponse) {
     const html = document.querySelector('html');
     const body = document.querySelector('body');
-
     if (request.backgroundColor) {
         html.style.backgroundColor = request.backgroundColor;
         body.style.backgroundColor = request.backgroundColor;
@@ -54,5 +41,3 @@ function updateCSS(request, sender, sendResponse) {
         body.style.fontFamily = '';
     }
 }
-
-

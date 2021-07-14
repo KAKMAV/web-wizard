@@ -33,13 +33,8 @@ fontColor.onchange = function (e) {
   getActiveTab().then((tabs) => {
     const currentFontColor = e.target.value;
     browser.tabs.sendMessage(tabs[0].id, {
-      fontColor: currentFontColor,
+      color: currentFontColor,
     });
-    // cookieVal.fontColor = currentFontColor;
-    // browser.cookie.set({
-    //   url: tabs[0].url,
-    //   name: 'popup',
-    //   value: JSON.stringify(cookieVal),
   });
 };
 
@@ -106,6 +101,12 @@ resetColor.onclick = function () {
         url: tabs[0].url,
       });
     });
+  cookieVal = {
+    color: '',
+    fontSize: '',
+    fontFamily: '',
+    textContent: '',
+  };
 };
 
 browser.cookies.onChanged.addListener((changeInfo) => {
