@@ -3,12 +3,35 @@ function getActiveTab() {
 }
 
 function cookieUpdate() {
-  getActiveTab().then((tabs) => {
-    const gettingCookies = browser.cookies.get({
-      url: tabs[0].url,
-      name: 'popup',
-    });
-    gettingCookies.then((cookie) => {
+  //   getActiveTab().then((tabs) => {
+  //     const gettingCookies = browser.cookies.get({
+  //       url: tabs[0].url,
+  //       name: 'popup',
+  //     });
+  //     gettingCookies.then((cookie) => {
+  //       if (cookie) {
+  //         const { backgroundColor, color, fontSize, fontFamily } = JSON.parse(
+  //           cookie.value
+  //         );
+  //         browser.tabs.sendMessage(tabs[0].id, {
+  //           backgroundColor,
+  //           color,
+  //           fontSize,
+  //           fontFamily,
+  //         });
+  //       }
+  //     });
+  //   });
+
+  getActiveTab()
+    .then(async (tabs) => {
+      const cookie = await browser.cookies.get({
+        url: tabs[0].url,
+        name: 'popup',
+      });
+      return { tabs, cookie };
+    })
+    .then(({ cookie, tabs }) => {
       if (cookie) {
         const { backgroundColor, color, fontSize, fontFamily } = JSON.parse(
           cookie.value
@@ -21,23 +44,6 @@ function cookieUpdate() {
         });
       }
     });
-  });
-  //   getActiveTab()
-  //     .then((tabs) => {
-  //       return browser.cookies.get({
-  //         url: tabs[0].url,
-  //         name: 'popup',
-  //       });
-  //     })
-  //     .then((cookie) => {
-  //       if (cookie) {
-  //         const cookieVal = JSON.parse(cookie.value);
-  //         browser.tabs.sendMessage(tabs[0].id, {
-  //           color: cookieVal.color,
-  //           fontSize: cookieVal.fontSize + 'px',
-  //         });
-  //       }
-  //     });
 }
 
 browser.tabs.onUpdated.addListener(cookieUpdate);
