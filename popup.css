@@ -1,39 +1,134 @@
 
+body {
+    background-image: url("images/Web_Wizard.png");
 
-h2 {
-    margin-bottom: 5px;
+    background-size: 75%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 600px;
+    height: 350px;
+    overflow: hidden;
+    font-weight: bolder;
+    
 }
 
-div {
-    padding: 5px;
+
+.popup-ui {
+display: flex;
+flex-direction: column;
+height: 100%;
+width: 100%;
 }
 
-.backgroundColor {
-    margin-top: 10px;
+.top-section {
+    display: flex;
+    flex-direction: row;
+   
+    height: 50%;
+    
+    
 }
+
+.top-right-section {
+    display: flex;
+   
+    width: 50%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.top-left-section {
+    display: flex;
+    
+    width: 50%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.bottom-section {
+    display: flex;
+    flex-direction: row;
+    
+    height: 50%;
+    
+}
+
+.bottom-right-section {
+    
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    text-align: center;
+}
+
+.bottom-left-section {
+    display: flex;
+    
+    width: 50%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    
+}
+
+
+.design-save {
+    height: 25%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+input, label {
+    display:block;
+}
+
 
 button {
-    display: grid;
     padding: 5px;
     margin: 5px;
     cursor: pointer;
-    height: 25px;
-    width: 90px;
-    border: 2px solid;
-    border-radius: 15%;
+    height: 30px;
+    width: 70px;
+    box-shadow: 1px 1px 1px 1px plum;
+    opacity: 85%;
+    text-align: center;
+    display: inline-block;
 }
 
-#storedDesign1 {
-border: 5px, solid, black;
-border-radius: 15%;
-height: 20px;
-width: 20px;
-}
-
-#colorPicker {
-    border: 2px, solid, black;
-    height: 50px;
-    width: 50px;
+.stored-designs {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
+    height: 75%;
+    align-items: center;
+    justify-content: space-evenly;
 }
+
+.storedDesign1 > button {
+    height: 55px;
+    width: 65px;
+}
+
+.storedDesign2 > button {
+    height: 55px;
+    width: 65px;
+}
+
+.storedDesign3 > button {
+    height: 55px;
+    width: 65px;
+}
+
+
+input {
+    opacity: 85%;
+}
+
