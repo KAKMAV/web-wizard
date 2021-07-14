@@ -1,8 +1,8 @@
 const colorPick = document.getElementById('colorInput');
 const resetColor = document.getElementById('color-reset');
-const cookieVal = { backgroundColor: '', fontSize: '', fontFamily: '', fontColor: '' };
+const cookieVal = {};
 
-const fontColorChange = document.getElementById('fontColor')
+const fontColorChange = document.getElementById('fontColor');
 const fontSizeChange = document.getElementById('fontSize');
 const fontFamilyChange = document.getElementById('fontFamily');
 
@@ -34,8 +34,13 @@ fontColor.onchange = function (e) {
   getActiveTab().then((tabs) => {
     const currentFontColor = e.target.value;
     browser.tabs.sendMessage(tabs[0].id, {
-      color: currentFontColor,
+      fontColor: currentFontColor,
     });
+    // cookieVal.fontColor = currentFontColor;
+    // browser.cookie.set({
+    //   url: tabs[0].url,
+    //   name: 'popup',
+    //   value: JSON.stringify(cookieVal),
   });
 };
 
@@ -87,6 +92,7 @@ textContentChange.onchange = function (e) {
   });
 };
 
+
 resetColor.onclick = function () {
   getActiveTab()
     .then((tabs) => {
@@ -101,12 +107,6 @@ resetColor.onclick = function () {
         url: tabs[0].url,
       });
     });
-  cookieVal = {
-    color: '',
-    fontSize: '',
-    fontFamily: '',
-    textContent: '',
-  };
 };
 
 
