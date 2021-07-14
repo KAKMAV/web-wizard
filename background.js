@@ -12,7 +12,7 @@ function cookieUpdate() {
             if (cookie) {
                 const cookieVal = JSON.parse(cookie.value);
                 browser.tabs.sendMessage(tabs[0].id, { color: cookieVal.color, fontSize: cookieVal.fontSize });
-    
+
             }
         });
     });
