@@ -33,8 +33,13 @@ fontColor.onchange = function (e) {
   getActiveTab().then((tabs) => {
     const currentFontColor = e.target.value;
     browser.tabs.sendMessage(tabs[0].id, {
-      color: currentFontColor,
+      fontColor: currentFontColor,
     });
+    // cookieVal.fontColor = currentFontColor;
+    // browser.cookie.set({
+    //   url: tabs[0].url,
+    //   name: 'popup',
+    //   value: JSON.stringify(cookieVal),
   });
 };
 
