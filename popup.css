@@ -1,6 +1,10 @@
 
 body {
     background-image: url("images/Web_Wizard.png");
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0540b92520af114b9e5ffdfee779838a7b9dedfd
     background-size: 75%;
     background-repeat: no-repeat;
     background-position: center;
@@ -12,9 +16,12 @@ body {
 }
 
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 0540b92520af114b9e5ffdfee779838a7b9dedfd
 .popup-ui {
 display: flex;
 flex-direction: column;
