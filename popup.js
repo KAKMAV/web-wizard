@@ -15,12 +15,12 @@ function getActiveTab() {
 
 colorPick.onchange = function (e) {
   getActiveTab().then((tabs) => {
-    const currentColor = e.target.value;
+    const backgroundColor = e.target.value;
     browser.tabs.sendMessage(tabs[0].id, {
-      backgroundColor: currentColor,
+      backgroundColor,
     });
 
-    cookieVal.backgroundColor = currentColor;
+    cookieVal.backgroundColor = backgroundColor;
     browser.cookies.set({
       url: tabs[0].url,
       name: 'popup',
@@ -31,22 +31,29 @@ colorPick.onchange = function (e) {
 
 fontColor.onchange = function (e) {
   getActiveTab().then((tabs) => {
-    const currentFontColor = e.target.value;
+    const color = e.target.value;
     browser.tabs.sendMessage(tabs[0].id, {
-      color: currentFontColor,
+      color,
+    });
+
+    cookieVal.color = color;
+    browser.cookies.set({
+      url: tabs[0].url,
+      name: 'popup',
+      value: JSON.stringify(cookieVal),
     });
   });
 };
 
 fontSize.onchange = function (e) {
   getActiveTab().then((tabs) => {
-    const currentFontSize = e.target.value;
+    const fontSize = e.target.value + 'px';
     browser.tabs.sendMessage(tabs[0].id, {
-      fontSize: currentFontSize + 'px',
+      fontSize,
     });
 
-    cookieVal.fontSize = currentFontSize;
-    browser.cookie.set({
+    cookieVal.fontSize = fontSize;
+    browser.cookies.set({
       url: tabs[0].url,
       name: 'popup',
       value: JSON.stringify(cookieVal),
@@ -56,13 +63,12 @@ fontSize.onchange = function (e) {
 
 fontFamilyChange.onchange = function (e) {
   getActiveTab().then((tabs) => {
-    const currentFontFamily = e.target.value;
+    const fontFamily = e.target.value;
     browser.tabs.sendMessage(tabs[0].id, {
-      fontFamily: currentFontFamily,
+      fontFamily,
     });
-
-    cookieVal.fontFamily = currentFontFamily;
-    browser.cookie.set({
+    cookieVal.fontFamily = fontFamily;
+    browser.cookies.set({
       url: tabs[0].url,
       name: 'popup',
       value: JSON.stringify(cookieVal),
@@ -78,14 +84,13 @@ textContentChange.onchange = function (e) {
     });
 
     cookieVal.textContent = currentTextContent;
-    browser.cookie.set({
+    browser.cookies.set({
       url: tabs[0].url,
       name: 'popup',
       value: JSON.stringify(cookieVal),
     });
   });
 };
-
 
 resetColor.onclick = function () {
   getActiveTab()
