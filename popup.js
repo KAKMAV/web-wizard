@@ -91,7 +91,6 @@ textContentChange.onchange = function (e) {
   });
 };
 
-//textContent Substitution Function
 
 resetColor.onclick = function () {
   getActiveTab()
@@ -107,12 +106,6 @@ resetColor.onclick = function () {
         url: tabs[0].url,
       });
     });
-  cookieVal = {
-    color: '',
-    fontSize: '',
-    fontFamily: '',
-    textContent: '',
-  };
 };
 
 browser.cookies.onChanged.addListener((changeInfo) => {
