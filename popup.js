@@ -13,10 +13,6 @@ function getActiveTab() {
   return browser.tabs.query({ active: true, currentWindow: true });
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 0540b92520af114b9e5ffdfee779838a7b9dedfd
 colorPick.onchange = function (e) {
   getActiveTab().then((tabs) => {
     const currentColor = e.target.value;
@@ -37,18 +33,8 @@ fontColor.onchange = function (e) {
   getActiveTab().then((tabs) => {
     const currentFontColor = e.target.value;
     browser.tabs.sendMessage(tabs[0].id, {
-<<<<<<< HEAD
-      fontColor: currentFontColor,
-    });
-    // cookieVal.fontColor = currentFontColor;
-    // browser.cookie.set({
-    //   url: tabs[0].url,
-    //   name: 'popup',
-    //   value: JSON.stringify(cookieVal),
-=======
       color: currentFontColor,
     });
->>>>>>> 0540b92520af114b9e5ffdfee779838a7b9dedfd
   });
 };
 
@@ -115,11 +101,6 @@ resetColor.onclick = function () {
         url: tabs[0].url,
       });
     });
-<<<<<<< HEAD
-};
-
-
-=======
   cookieVal = {
     color: '',
     fontSize: '',
@@ -128,7 +109,6 @@ resetColor.onclick = function () {
   };
 };
 
->>>>>>> 0540b92520af114b9e5ffdfee779838a7b9dedfd
 browser.cookies.onChanged.addListener((changeInfo) => {
   console.log(`cookie changed:\n
     * cookie: ${JSON.stringify(changeInfo.cookie)}\n
