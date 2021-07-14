@@ -1,7 +1,8 @@
 const colorPick = document.getElementById('colorInput');
-const resetColor = document.querySelector('.color-reset button');
-const cookieVal = { color: '', fontSize: '', fontFamily: '', textContent: '', image: ''};
+const resetColor = document.getElementById('color-reset');
+const cookieVal = { backgroundColor: '', fontSize: '', fontFamily: '', fontColor: '' };
 
+const fontColorChange = document.getElementById('fontColor')
 const fontSizeChange = document.getElementById('fontSize');
 const fontFamilyChange = document.getElementById('fontFamily');
 
@@ -12,64 +13,15 @@ function getActiveTab() {
   return browser.tabs.query({ active: true, currentWindow: true });
 }
 
-for(const i = 0; i < colorBtns.length; i ++) {
-    const imgName = colorBtns[i].getAttribute('class');
-    const colorImg = 'url(\'images/' + imgName + '.png\')';
-    colorBtns[i].style.backgroundImage = colorImg;
-
-    colorBtns[i].onclick = function(e) {
-        getActiveTab().then((tabs) => {
-            const imgName = e.target.getAttribute('class');
-            // double check the routing if code does not compile
-            const fullUrl = browser.extension.getUrl('/images/'+ imgName + '.png'); 
-            browser.tabs.sendMessage(tabs[0].id, {image: fullUrl});
-
-            cookieVal.image = fullUrl;
-            browser.cookies.set({
-                url: tabs[0].url,
-                // double check the name key "name", if code does not compile
-                name: "popup",
-                value: JSON.stringify(cookieVal)
-            })
-        });
-    }
-}
 
 colorPick.onchange = function (e) {
   getActiveTab().then((tabs) => {
     const currentColor = e.target.value;
     browser.tabs.sendMessage(tabs[0].id, {
-      color: currentColor,
+      backgroundColor: currentColor,
     });
 
-fontSize.onchange = function (e) {
-    getActiveTab().then((tabs) => {
-        const currentFontSize  = e.target.value;
-        browser.tabs.sendMessage(tabs[0].id, {
-            fontSize: currentFontSize + "px"
-        });
-
-    cookieVal.fontSize = currenFontSize;
-    browser.cookie.set({
-        url: tabs[0].url,
-        name: 'popup',
-        value: JSON.stringify(cookieVal)
-        })
-    });
-}
-
-resetColor.onclick = function () {
-    console.log('hello');
-    getActiveTab().then((tabs) => {
-        browser.tabs.sendMessage(tabs[0].id, {
-            reset: true
-        });
-
-        cookieVal = {
-            color: '',
-            fontSize: ''
-        };
-    cookieVal.color = currentColor;
+    cookieVal.backgroundColor = currentColor;
     browser.cookies.set({
       url: tabs[0].url,
       name: 'popup',
@@ -78,14 +30,23 @@ resetColor.onclick = function () {
   });
 };
 
-fontSizeChange.onchange = function (e) {
+fontColor.onchange = function (e) {
+  getActiveTab().then((tabs) => {
+    const currentFontColor = e.target.value;
+    browser.tabs.sendMessage(tabs[0].id, {
+      color: currentFontColor,
+    });
+  });
+};
+
+fontSize.onchange = function (e) {
   getActiveTab().then((tabs) => {
     const currentFontSize = e.target.value;
     browser.tabs.sendMessage(tabs[0].id, {
       fontSize: currentFontSize + 'px',
     });
 
-    cookieVal.fontSize = currenFontSize;
+    cookieVal.fontSize = currentFontSize;
     browser.cookie.set({
       url: tabs[0].url,
       name: 'popup',
@@ -126,26 +87,26 @@ textContentChange.onchange = function (e) {
   });
 };
 
-
 resetColor.onclick = function () {
-  console.log('hello');
-  getActiveTab().then((tabs) => {
-    browser.tabs.sendMessage(tabs[0].id, {
-      reset: true,
+  getActiveTab()
+    .then((tabs) => {
+      browser.tabs.sendMessage(tabs[0].id, {
+        reset: true,
+      });
+      return tabs;
+    })
+    .then((tabs) => {
+      browser.cookies.remove({
+        name: 'popup',
+        url: tabs[0].url,
+      });
     });
-
-    cookieVal = {
-      color: '',
-      fontSize: '',
-      fontFamily: '',
-      textContent: '',
-    };
-
-    browser.cookies.remove({
-      url: tabs[0].url,
-      name: 'popup',
-    });
-  });
+  cookieVal = {
+    color: '',
+    fontSize: '',
+    fontFamily: '',
+    textContent: '',
+  };
 };
 
 
