@@ -23,16 +23,16 @@ Users will be able to save changes they made and recall them upon later viewing.
 Stretch Goals:
 -Users can share designs with other users
 -Additional CSS selectors: flex/grid, orientation
--Additional browser support besides chrome (mozilla or safari)
+-Additional browser support besides Mozilla (maybe chrome or safari)
 
 Functional Requirements:
--User can install the extension from chrome marketplace
+-User can install the extension from mozilla marketplace
 -User activates the extension and is able to immediately play with CSS editor
 -User can save their changes
--User can sign in (not sure if this is required/possible with extension)
+
 
 Non-functional Requirements:
 -Easy to use (Users can easily understand how the extension works and be able to utilize it quickly
--Easy to install (Users should be able to find and install the extension from Chrome's marketplace with relative ease)
+-Easy to install (Users should be able to find and install the extension from Mozilla's marketplace with relative ease)
 -Fun to play with
 
