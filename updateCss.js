@@ -44,14 +44,11 @@ function updateCSS(request) {
         .find((row) => row.startsWith('popup='))
         .split('=')[1]
     );
-    console.log(cookieVal);
     const textContent = JSON.parse(cookieVal.textContent);
-    console.log(textContent);
     const newTextContent = {};
-    for (let key of textContent.keys()) {
+    for (let key of Object.keys(textContent)) {
       newTextContent[textContent[key]] = key;
     }
-    console.log(newTextContent);
     replaceText(newTextContent, document.body);
     html.style.backgroundColor = '';
     body.style.backgroundColor = '';
