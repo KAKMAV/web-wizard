@@ -1,11 +1,8 @@
-function getActiveTab() {
-  return browser.tabs.query({ active: true, currentWindow: true });
-}
-
 ['backgroundColor', 'fontColor', 'fontSize', 'fontFamily', 'textContent'].map(
   (id) => {
     document.getElementById(id).onchange = function (e) {
-      getActiveTab()
+      browser.tabs
+        .query({ active: true, currentWindow: true })
         .then(async (tabs) => {
           await browser.tabs.sendMessage(tabs[0].id, { [id]: e.target.value });
           return tabs;
@@ -33,8 +30,9 @@ function getActiveTab() {
   }
 );
 
-document.getElementById('color-reset').onclick = function () {
-  getActiveTab()
+document.getElementById('reset').onclick = function () {
+  browser.tabs
+    .query({ active: true, currentWindow: true })
     .then((tabs) => {
       browser.tabs.sendMessage(tabs[0].id, {
         reset: true,
