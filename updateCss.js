@@ -5,7 +5,7 @@ function replaceText(wordMap, node) {
     }
     let content = node.textContent;
     for (let word in wordMap) {
-      content = content.replace(new RegExp(word, 'gi'), wordMap[word]);
+      content = content.replace(new RegExp(word, 'g'), wordMap[word]);
     }
     node.textContent = content;
   } else {
