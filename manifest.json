@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Web Wizard",
     "version": "1.0",
-    "description": "Adds a red border to all webpages matching mozilla.org.",
+    "description": "Perform web wizardry in the form of css magic!",
     "icons": {
         "16": "/images/get_started16.png",
         "32": "/images/get_started32.png",
@@ -23,7 +23,6 @@
         "scripts": [
             "background.js"
         ]
-
     },
     "content_scripts": [
         {
@@ -31,9 +30,8 @@
                 "<all_urls>"
             ],
             "js": [
-                "content_scripts/updateCss.js"
+                "updateCss.js"
             ]
         }
     ]
-
 }
