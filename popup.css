@@ -80,13 +80,6 @@ button {
   display: inline-block;
 }
 
-.stored-designs {
-  display: flex;
-  flex-direction: row;
-  height: 75%;
-  align-items: center;
-  justify-content: space-evenly;
-}
 
 input {
   opacity: 85%;

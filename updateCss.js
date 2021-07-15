@@ -3,6 +3,7 @@ function replaceText(wordMap, node) {
     if (node.parentNode && node.parentNode.nodeName === 'TEXTAREA') {
       return;
     }
+    //This creates our wordmap, replacing text content within the webnode based on user input, following regex rule
     let content = node.textContent;
     for (let word in wordMap) {
       content = content.replace(new RegExp(word, 'gi'), wordMap[word]);
@@ -15,6 +16,7 @@ function replaceText(wordMap, node) {
   }
 }
 
+//receives request from extension and updates browser content
 function updateCSS(request) {
   const html = document.querySelector('html');
   const body = document.querySelector('body');
