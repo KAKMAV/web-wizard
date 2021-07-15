@@ -23,10 +23,6 @@
         "scripts": [
             "background.js"
         ]
-<<<<<<< HEAD
-=======
-
->>>>>>> 0540b92520af114b9e5ffdfee779838a7b9dedfd
     },
     "content_scripts": [
         {
@@ -38,8 +34,4 @@
             ]
         }
     ]
-<<<<<<< HEAD
-=======
-
->>>>>>> 0540b92520af114b9e5ffdfee779838a7b9dedfd
 }
