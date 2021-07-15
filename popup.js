@@ -2,12 +2,13 @@ function getActiveTab() {
   return browser.tabs.query({ active: true, currentWindow: true });
 }
 
-['backgroundColor', 'color', 'fontSize', 'fontFamily', 'textContent'].map(
+['backgroundColor', 'fontColor', 'fontSize', 'fontFamily', 'textContent'].map(
   (id) => {
     document.getElementById(id).onchange = function (e) {
       getActiveTab()
         .then(async (tabs) => {
-          await browser.tabs.sendMessage(tabs[0].id, { key: value });
+          console.log(`id: ${id}, value: ${e.target.value}`);
+          await browser.tabs.sendMessage(tabs[0].id, { [id]: e.target.value });
           return tabs;
         })
         .then(async (tabs) => {
@@ -19,7 +20,7 @@ function getActiveTab() {
         })
         .then(({ cookie, tabs }) => {
           const cookieVal = cookie ? JSON.parse(cookie.value) : {};
-          cookieVal[key] = value;
+          cookieVal[id] = e.target.value;
           browser.cookies.set({
             url: tabs[0].url,
             name: 'popup',

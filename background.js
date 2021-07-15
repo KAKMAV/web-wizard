@@ -1,4 +1,6 @@
-import { getActiveTab } from './utils.js';
+function getActiveTab() {
+  return browser.tabs.query({ active: true, currentWindow: true });
+}
 
 function cookieUpdate() {
   getActiveTab()
@@ -7,19 +9,12 @@ function cookieUpdate() {
         url: tabs[0].url,
         name: 'popup',
       });
-      return { tabs, cookie };
+      return { cookie, tabs };
     })
     .then(({ cookie, tabs }) => {
+      console.log(JSON.parse(cookie.value));
       if (cookie) {
-        const { backgroundColor, color, fontSize, fontFamily } = JSON.parse(
-          cookie.value
-        );
-        browser.tabs.sendMessage(tabs[0].id, {
-          backgroundColor,
-          color,
-          fontSize,
-          fontFamily,
-        });
+        browser.tabs.sendMessage(tabs[0].id, JSON.parse(cookie.value));
       }
     });
 }
