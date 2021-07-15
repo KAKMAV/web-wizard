@@ -16,7 +16,6 @@ function replaceText(wordMap, node) {
 }
 
 function updateCSS(request) {
-  console.log(request);
   const html = document.querySelector('html');
   const body = document.querySelector('body');
   if (request.backgroundColor) {

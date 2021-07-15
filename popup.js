@@ -7,7 +7,6 @@ function getActiveTab() {
     document.getElementById(id).onchange = function (e) {
       getActiveTab()
         .then(async (tabs) => {
-          console.log(`id: ${id}, value: ${e.target.value}`);
           await browser.tabs.sendMessage(tabs[0].id, { [id]: e.target.value });
           return tabs;
         })

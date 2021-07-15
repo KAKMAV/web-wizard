@@ -12,7 +12,6 @@ function cookieUpdate() {
       return { cookie, tabs };
     })
     .then(({ cookie, tabs }) => {
-      console.log(JSON.parse(cookie.value));
       if (cookie) {
         browser.tabs.sendMessage(tabs[0].id, JSON.parse(cookie.value));
       }
