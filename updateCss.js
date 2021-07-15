@@ -5,7 +5,7 @@ function replaceText(wordMap, node) {
     }
     let content = node.textContent;
     for (let word in wordMap) {
-      content = content.replace(new RegExp(word, 'gi'), wordMap[word]);
+      content = content.replace(new RegExp(word, 'g'), wordMap[word]);
     }
     node.textContent = content;
   } else {
@@ -38,6 +38,18 @@ function updateCSS(request) {
     replaceText(JSON.parse(request.textContent), document.body);
   }
   if (request.reset) {
+    const cookieVal = JSON.parse(
+      document.cookie
+        .split('; ')
+        .find((row) => row.startsWith('popup='))
+        .split('=')[1]
+    );
+    const textContent = JSON.parse(cookieVal.textContent);
+    const newTextContent = {};
+    for (let key of Object.keys(textContent)) {
+      newTextContent[textContent[key]] = key;
+    }
+    replaceText(newTextContent, document.body);
     html.style.backgroundColor = '';
     body.style.backgroundColor = '';
     html.style.fontSize = '';
