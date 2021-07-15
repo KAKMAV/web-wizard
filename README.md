@@ -1,7 +1,12 @@
 # web-wizard
 
-Testing
-Team Members: Angel, Kara, Matt, Kalan, Vijay, Austi
+Team Members: 
+Angel Ortiz: https://github.com/AngelDOrtiz
+Austin Duong: https://github.com/austinxduong
+Kalan Prudhomme: https://github.com/prudhomk
+Kara Pedersen: https://github.com/KaraPedersen
+Matt Saber: https://github.com/Saber-Matt
+Vijay Chakilam: https://github.com/thankrandomness
 
 WebWizard is a chrome extension that allows users to maniuplate the CSS of any website to their own personal design choices.
 
