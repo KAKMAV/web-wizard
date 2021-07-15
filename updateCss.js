@@ -38,36 +38,21 @@ function updateCSS(request) {
     replaceText(JSON.parse(request.textContent), document.body);
   }
   if (request.reset) {
-    console.log('reset');
-    browser.tabs
-      .query({ active: true, currentWindow: true })
-      .then((tabs) => {
-        console.log('reset2');
-        return browser.cookies.get({
-          url: tabs[0].url,
-          name: 'popup',
-        });
-      })
-      .then((cookie) => {
-        console.log('reset3');
-        const newTextContent = {};
-        if (cookie && cookie.value.textContent) {
-          const cookieVal = JSON.parse(cookie.value);
-          console.log(cookieVal);
-          const textContent = JSON.parse(cookieVal.textContent);
-          console.log(textContent);
-          for (let key of textContent.keys()) {
-            newTextContent[textContent[key]] = key;
-          }
-        }
-        return newTextContent;
-      })
-      .then((newTextContent) => {
-        console.log('reset4');
-        replaceText(JSON.parse(request.textContent), document.body);
-      })
-      .catch((error) => console.log(error));
-    console.log('reset5');
+    const cookieVal = JSON.parse(
+      document.cookie
+        .split('; ')
+        .find((row) => row.startsWith('popup='))
+        .split('=')[1]
+    );
+    console.log(cookieVal);
+    const textContent = JSON.parse(cookieVal.textContent);
+    console.log(textContent);
+    const newTextContent = {};
+    for (let key of textContent.keys()) {
+      newTextContent[textContent[key]] = key;
+    }
+    console.log(newTextContent);
+    replaceText(newTextContent, document.body);
     html.style.backgroundColor = '';
     body.style.backgroundColor = '';
     html.style.fontSize = '';
