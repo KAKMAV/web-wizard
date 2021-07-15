@@ -1,66 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <link rel="stylesheet" href="popup.css" />
     <link rel="stylesheet" href="drip.css">
 </head>
-
 <body>
     <div class="popup-ui">
         <div class="top-section">
             <div class="top-left-section">
                 <h2>Web Wizard</h2>
             </div>
-
             <div class="top-right-section">
-
                 <div class="backgroundColor">
                     <label for="backgroundColor">Background Color:</label>
-                    <input type="text" id="colorInput" placeholder="Enter a color" /><br />
+                    <input type="text" id="backgroundColor" placeholder="Enter a color" /><br />
                 </div>
-
                 <div>
                     <label for="textContent">New Text Content:</label>
                     <input type="text" id="textContent" name="textContent"
                         placeholder="{''old word'': ''new word''}" /><br />
                 </div>
-
             </div>
         </div>
         <div class="bottom-section">
             <div class="bottom-left-section">
-
             </div>
             <div class="bottom-right-section">
                 <div>
                     <label for="fontFamily">Font Family:</label>
                     <input placeholder="Enter a font" type="text" id="fontFamily" name="fontFamily" /><br />
                 </div>
-
                 <div>
                     <label for="fontSize">Font Size:</label>
                     <input placeholder="Enter a font size" type="number" id="fontSize" name="fontSize" /><br />
-                    <!-- <button id="font-size-reset">Change Font Size</button> -->
                 </div>
-
                 <div>
                     <label for="fontColor">Font Color:</label>
                     <input placeholder="Enter a font color" id="fontColor" name="fontColor" /><br />
                 </div>
                 <div class="design-save">
-
                     <button id="color-reset">Undo All</button>
                 </div>
-
-
             </div>
         </div>
-
     </div>
     </div>
-
     <script src="popup.js"></script>
 </body>
-
 </html>
