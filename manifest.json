@@ -23,7 +23,6 @@
         "scripts": [
             "background.js"
         ]
-
     },
     "content_scripts": [
         {
@@ -31,9 +30,8 @@
                 "<all_urls>"
             ],
             "js": [
-                "content_scripts/updateCss.js"
+                "updateCss.js"
             ]
         }
     ]
-
 }
