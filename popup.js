@@ -34,15 +34,19 @@ document.getElementById('reset').onclick = function () {
   browser.tabs
     .query({ active: true, currentWindow: true })
     .then((tabs) => {
-      browser.tabs.sendMessage(tabs[0].id, {
-        reset: true,
-      });
-      return tabs;
-    })
-    .then((tabs) => {
       browser.cookies.remove({
         name: 'popup',
         url: tabs[0].url,
       });
-    });
-};
+      return tabs;
+    })
+    .then((tabs) => {
+      browser.tabs.sendMessage(tabs[0].id, {
+        reset: true,
+      });
+  });
+  ['backgroundColor', 'fontColor', 'fontSize', 'fontFamily', 'textContent'].map(
+    (id) => {
+      document.getElementById(id).value = '';
+    })
+}
