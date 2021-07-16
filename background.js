@@ -1,9 +1,7 @@
-function getActiveTab() {
-  return browser.tabs.query({ active: true, currentWindow: true });
-}
-
 function cookieUpdate() {
-  getActiveTab()
+  //This awaits the cookie values and updates the browser based on those values
+  browser.tabs
+    .query({ active: true, currentWindow: true })
     .then(async (tabs) => {
       const cookie = await browser.cookies.get({
         url: tabs[0].url,
